@@ -1,19 +1,48 @@
-# GLM-5.1 & GLM-5
+# GLM-5.3 & GLM-5.2 & GLM-5.1 & GLM-5
 
 <div align="center">
 <img src=resources/logo.svg width="15%"/>
 </div>
 <p align="center">
-    👋 加入我们的 <a href="resources/WECHAT.md" target="_blank">微信</a> 或 <a href="https://discord.gg/zFMhpMRFP" target="_blank">Discord</a> 社区。
+    👋 加入我们的 <a href="resources/WECHAT.md" target="_blank">微信</a> 或 <a href="https://discord.gg/Hc5z9bx5Xw" target="_blank">Discord</a> 社区。
     <br>
-    📖 查看 GLM-5.1 <a href="https://z.ai/blog/glm-5.1" target="_blank">技术博客</a> 和 GLM-5 <a href="https://arxiv.org/abs/2602.15763" target="_blank">技术报告</a>。
+    📖 查看 GLM-5.3-Flash <a href="https://z.ai/blog/glm-5.3-flash" target="_blank">技术博客</a>、GLM-5.3 <a href="https://z.ai/blog/glm-5.3" target="_blank">技术博客</a> 和 GLM-5 <a href="https://arxiv.org/abs/2602.15763" target="_blank">技术报告</a>。
     <br>
-    📍 在 <a href="https://docs.z.ai/guides/llm/glm-5.1">Z.ai API 平台</a> 使用 GLM-5.1 API 服务。
+    📍 在 <a href="https://docs.bigmodel.cn/cn/guide/models/text/glm-5.3">API 平台</a> 使用 GLM-5.3 & GLM-5.3-Flash API 服务。
     <br>
-    🔜 GLM-5.1 即将在 <a href="https://chat.z.ai">chat.z.ai</a> 上线。
+    🔜 在 <a href="https://z.ai">z.ai</a> 上体验 GLM-5.3 & GLM-5.3-Flash。
 </p>
 
 ## 简介
+
+### GLM-5.3 & GLM-5.3-Flash
+
+GLM-5.3 与 GLM-5.2 使用相同的基座模型——所有提升均来自后训练。与 GLM-5.2 相比，它在复杂编码和长程任务上的表现显著更强：
+
+- **更强的编码能力**：GLM-5.3 是目前编码能力最强的开放权重模型，在我们内部的 Z.ai Code Bench 上相比 GLM-5.2 提升 50%。它还在 Terminal Bench 3.0 和 Agents' Last Exam 等公开基准上达到开源 SOTA。
+- **涌现的网络安全能力**：随着后训练规模的扩大，网络安全能力的发展超出了我们的预期。GLM-5.3 在 CyberGym 漏洞发现基准上达到最先进水平，且在利用链越靠后的环节提升越大——在漏洞利用类基准上成绩超过 GLM-5.2 的两倍。
+
+![bench_53](resources/bench_53_2.png)
+
+GLM-5.3-Flash 基于全新训练的基座模型，其架构与训练方案围绕能力与效率进行了重新设计。我们在 GLM 系列中首次引入稀疏注意力与线性注意力相结合的混合架构，在保持精准长上下文能力的同时，大幅降低长上下文推理成本。模型还采用了流形约束超连接（Manifold-Constrained Hyper-Connections，mHC），进一步提升扩展效率。配合我们最新的 30T token 多模态预训练语料，这些改进使 GLM-5.3-Flash 以更少的算力交付更强的智能。
+
+![bench_53](resources/bench_53.png)
+
+### GLM-5.2
+
+GLM-5.2，面向长程任务的最新旗舰模型。相比前代 GLM-5.1，它在长周期任务能力上实现了重大飞跃，并且首次在**稳定的 100 万 token 上下文**上交付这一能力。
+
+GLM-5.2 的新能力包括：
+
+- **稳定的 100 万上下文：** 提供稳定的 100 万 token 上下文，可持续支撑长周期工作
+- **支持弹性思考力度的高级编码**：更强的编码能力，并提供多档思考力度（thinking effort），以平衡性能与延迟
+- **改进的架构**：我们提出了 [IndexShare](https://arxiv.org/abs/2603.12201)，在每四个稀疏注意力层之间复用同一个索引器，在 100 万上下文长度下将每 token 的 FLOPs 降低 2.9 倍。我们还改进了 GLM-5.2 用于推测解码的 MTP 层，将接受长度提升最多 20%。
+
+![bench_52](resources/bench_52.png)
+
+在标准编码基准测试中，GLM-5.2 是最强的开源模型，相比 GLM-5.1 大幅领先：在 Terminal-Bench 2.1 上为 81.0 对 62.0，在 SWE-bench Pro 上为 62.1 对 58.4。它还大幅缩小了与闭源前沿模型的差距——在 Terminal-Bench 2.1（81.0）上，与 Claude Opus 4.8（85.0）仅相差几分——同时保持领先于 Gemini 3.1 Pro。
+
+更多细节，请查看我们的[博客](https://z.ai/blog/glm-5.2)。
 
 ### GLM-5.1
 
@@ -43,80 +72,52 @@ GLM-5 专为复杂系统工程和长周期智能体任务而设计。在我们�
 
 ## 下载模型
 
-| 模型        | 下载链接                                                                                                                            | 模型规模   | 精度 |
-|-------------|-------------------------------------------------------------------------------------------------------------------------------------|------------|------|
-| GLM-5.1     | [🤗 Hugging Face](https://huggingface.co/zai-org/GLM-5.1)<br> [🤖 ModelScope](https://modelscope.cn/models/ZhipuAI/GLM-5.1)         | 744B-A40B  | BF16 |
-| GLM-5.1-FP8 | [🤗 Hugging Face](https://huggingface.co/zai-org/GLM-5.1-FP8)<br> [🤖 ModelScope](https://modelscope.cn/models/ZhipuAI/GLM-5.1-FP8) | 744B-A40B  | FP8  |
-| GLM-5       | [🤗 Hugging Face](https://huggingface.co/zai-org/GLM-5)<br> [🤖 ModelScope](https://modelscope.cn/models/ZhipuAI/GLM-5)             | 744B-A40B  | BF16 |
-| GLM-5-FP8   | [🤗 Hugging Face](https://huggingface.co/zai-org/GLM-5-FP8)<br> [🤖 ModelScope](https://modelscope.cn/models/ZhipuAI/GLM-5-FP8)     | 744B-A40B  | FP8  |
+| 模型               | 下载链接                                                                                                                                      | 模型规模   | 精度 |
+|--------------------|-----------------------------------------------------------------------------------------------------------------------------------------------|------------|------|
+| GLM-5.3            | [🤗 Hugging Face](https://huggingface.co/zai-org/GLM-5.3)<br> [🤖 ModelScope](https://modelscope.cn/models/ZhipuAI/GLM-5.3)                   | 744B-A40B  | FP8  |
+| GLM-5.3-BF16       | [🤗 Hugging Face](https://huggingface.co/zai-org/GLM-5.3-BF16)<br> [🤖 ModelScope](https://modelscope.cn/models/ZhipuAI/GLM-5.3-BF16)         | 744B-A40B  | BF16 |
+| GLM-5.3-Flash      | [🤗 Hugging Face](https://huggingface.co/zai-org/GLM-5.3-Flash)<br> [🤖 ModelScope](https://modelscope.cn/models/ZhipuAI/GLM-5.3-Flash)       | 320B-A18B  | FP8  |
+| GLM-5.3-Flash-BF16 | [🤗 Hugging Face](https://huggingface.co/zai-org/GLM-5.3-Flash-BF16)<br> [🤖 ModelScope](https://modelscope.cn/models/ZhipuAI/GLM-5.3-Flash-BF16) | 320B-A18B  | BF16 |
+| GLM-5.2            | [🤗 Hugging Face](https://huggingface.co/zai-org/GLM-5.2)<br> [🤖 ModelScope](https://modelscope.cn/models/ZhipuAI/GLM-5.2)                   | 744B-A40B  | BF16 |
+| GLM-5.2-FP8        | [🤗 Hugging Face](https://huggingface.co/zai-org/GLM-5.2-FP8)<br> [🤖 ModelScope](https://modelscope.cn/models/ZhipuAI/GLM-5.2-FP8)           | 744B-A40B  | FP8  |
+| GLM-5.1            | [🤗 Hugging Face](https://huggingface.co/zai-org/GLM-5.1)<br> [🤖 ModelScope](https://modelscope.cn/models/ZhipuAI/GLM-5.1)                   | 744B-A40B  | BF16 |
+| GLM-5.1-FP8        | [🤗 Hugging Face](https://huggingface.co/zai-org/GLM-5.1-FP8)<br> [🤖 ModelScope](https://modelscope.cn/models/ZhipuAI/GLM-5.1-FP8)           | 744B-A40B  | FP8  |
+| GLM-5              | [🤗 Hugging Face](https://huggingface.co/zai-org/GLM-5)<br> [🤖 ModelScope](https://modelscope.cn/models/ZhipuAI/GLM-5)                       | 744B-A40B  | BF16 |
+| GLM-5-FP8          | [🤗 Hugging Face](https://huggingface.co/zai-org/GLM-5-FP8)<br> [🤖 ModelScope](https://modelscope.cn/models/ZhipuAI/GLM-5-FP8)               | 744B-A40B  | FP8  |
 
 ## 本地部署 GLM-5 系列模型
 
-### 准备环境
+### GLM-5.3-Flash
 
-vLLM、SGLang、xLLM 和 Ktransformers 均支持 GLM-5 系列模型的本地部署, 以下提供简要的部署指南。
+- [SGLang](https://github.com/sgl-project/sglang) — 参见 [cookbook](https://cookbook.sglang.io/autoregressive/GLM/GLM-5.3-Flash)
+- [vLLM](https://github.com/vllm-project/vllm) — 参见 [recipes](https://recipes.vllm.ai/zai-org/GLM-5.3-Flash)
+- [TokenSpeed](https://github.com/lightseekorg/tokenspeed) — 参见 [此处](https://lightseek.org/tokenspeed/recipes/models#glm-5-3-flash)
+- [Transformers](https://github.com/huggingface/transformers) — 参见 [transformers docs](https://github.com/huggingface/transformers/blob/main/docs/source/en/model_doc/glm5_next.md)
+- [KTransformers](https://github.com/kvcache-ai/ktransformers) — 参见 [tutorial](https://github.com/kvcache-ai/ktransformers/blob/main/doc/en/kt-kernel/GLM-5.3-Flash-Tutorial.md)
+- [Unsloth](https://github.com/unslothai/unsloth) — 参见 [guide](https://unsloth.ai/docs/models/glm-5.3)
 
-+ vLLM
+### GLM-5.3 及更早的 GLM-5 系列模型
 
-    使用 Docker 部署：
-    ```shell
-    docker pull vllm/vllm-openai:glm51
-    docker pull vllm/vllm-openai:glm51-cu130 # For CUDA 13.0
-    ```
+- [SGLang](https://github.com/sgl-project/sglang)  — 参见 [cookbook](https://cookbook.sglang.io/autoregressive/GLM/GLM-5.3)
+- [vLLM](https://github.com/vllm-project/vllm) — 参见 [recipes](https://recipes.vllm.ai/zai-org/GLM-5.3)
+- [Transformers](https://github.com/huggingface/transformers) — 参见 [transformers docs](https://github.com/huggingface/transformers/blob/main/docs/source/en/model_doc/glm_moe_dsa.md)
+- [KTransformers](https://github.com/kvcache-ai/ktransformers) — 参见 [tutorial](https://github.com/kvcache-ai/ktransformers/blob/main/doc/en/kt-kernel/GLM-5.2-Tutorial.md)
+- [Unsloth](https://github.com/unslothai/unsloth) — 参见 [guide](https://unsloth.ai/docs/models/glm-5.2)
+- 在 `Ascend NPU` 平台上部署时，支持 vLLM-Ascend、xLLM 、SGLang 等推理框架，参见 [这里](example/ascend.md)
 
-+ SGLang
 
-    使用 Docker 部署：
-    ```bash
-    docker pull lmsysorg/sglang:v0.5.10
-    docker pull lmsysorg/sglang:v0.5.10-cu130 # For CUDA 13.0
-    ```
+### 注意事项
 
-### 部署
+- **GLM-5.2** 的 `reasoning_effort` 仅接受 `high` 和 `max` 两档，默认值为 `max`，回退行为相同。
+- **GLM-5.3 与 GLM-5.3-Flash** 支持通过 `reasoning_effort` 参数控制思考力度，可选 `low`、`high`、`max` 三档。若不传入（或设置为其他任意值），默认为 `max`；如需使用 `low` 或 `high` 档，请显式传入。对于基准测试和榜单复现场景，请保持默认的 `max`。
+- 在 GLM-5.3 和 GLM-5.3-Flash 的 chat template 中，`clear_thinking` 若不传入则默认为 `false`。对于对话场景，请显式传入 `clear_thinking=true`。
 
-+ vLLM
+## 微调 GLM-5 系列模型
 
-    ```shell
-    vllm serve zai-org/GLM-5.1-FP8 \
-         --tensor-parallel-size 8 \
-         --gpu-memory-utilization 0.85 \
-         --speculative-config.method mtp \
-         --speculative-config.num_speculative_tokens 3 \
-         --tool-call-parser glm47 \
-         --reasoning-parser glm45 \
-         --enable-auto-tool-choice \
-         --chat-template-content-format=string \
-         --served-model-name glm-5.1-fp8
-    ```
-    查看更多详情请参考 [部署指南](https://github.com/vllm-project/recipes/blob/main/GLM/GLM5.md)。
+GLM-5 系列支持使用以下多种框架进行微调，欢迎尝试：
 
-> 提醒：如果遇到MTP下Tool Call Parse失败的问题，请使用 vllm main 分支重新部署 GLM-5.1。
-
-+ SGLang
-
-    ```shell
-    SGLANG_ENABLE_SPEC_V2=1 sglang serve \
-        --model-path zai-org/GLM-5.1-FP8 \
-        --tp-size 8 \
-        --tool-call-parser glm47  \
-        --reasoning-parser glm45 \
-        --speculative-algorithm EAGLE \
-        --speculative-num-steps 3 \
-        --speculative-eagle-topk 1 \
-        --speculative-num-draft-tokens 4 \
-        --mem-fraction-static 0.85 \
-        --served-model-name glm-5.1-fp8
-    ```
-
-    查看更多详情请参考 [SGLang Cookbook](https://cookbook.sglang.io/autoregressive/GLM/GLM-5.1)。
-
-+ xLLM
-
-    请查看[此处的部署指南](https://github.com/zai-org/GLM-5/blob/main/example/ascend.md)。
-
-+ Ktransformers
-
-    请查看[此处的部署指南](https://github.com/kvcache-ai/ktransformers/blob/main/doc/en/kt-kernel/GLM-5.1-Tutorial.md)。
+- [Slime](https://github.com/THUDM/slime) (v0.3.0+), GLM团队使用的强化学习框架。
+- [ms-swift](https://github.com/modelscope/ms-swift) (v4.4.0+)，支持 SFT，PPO，GRPO。
 
 ## 引用
 

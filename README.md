@@ -1,19 +1,48 @@
-# GLM-5.1 & GLM-5
+# GLM-5.3 & GLM-5.2 & GLM-5.1 & GLM-5
 
 <div align="center">
 <img src=resources/logo.svg width="15%"/>
 </div>
 <p align="center">
-    👋 Join our <a href="resources/WECHAT.md" target="_blank">Wechat</a> or <a href="https://discord.gg/zFMhpMRFP" target="_blank">Discord</a> community.
+    👋 Join our <a href="resources/WECHAT.md" target="_blank">Wechat</a> or <a href="https://discord.gg/Hc5z9bx5Xw" target="_blank">Discord</a> community.
     <br>
-    📖 Check out the GLM-5.1 <a href="https://z.ai/blog/glm-5.1" target="_blank">blog</a> and GLM-5 <a href="https://arxiv.org/abs/2602.15763" target="_blank">Technical report</a>.
+    📖 Check out the GLM-5.3-Flash <a href="https://z.ai/blog/glm-5.3-flash" target="_blank">blog</a>, GLM-5.3 <a href="https://z.ai/blog/glm-5.3" target="_blank">blog</a> and GLM-5 <a href="https://arxiv.org/abs/2602.15763" target="_blank">Technical report</a>.
     <br>
-    📍 Use GLM-5.1 API services on <a href="https://docs.z.ai/guides/llm/glm-5.1">Z.ai API Platform. </a>
+    📍 Use GLM-5.3 & GLM-5.3-Flash API services on <a href="https://docs.z.ai/guides/llm/glm-5.3">Z.ai API Platform. </a>
     <br>
-    🔜 <a href="https://chat.z.ai">GLM-5.1</a> will be available on chat.z.ai in the coming days.
+    🔜 Try GLM-5.3 & GLM-5.3-Flash at <a href="https://z.ai">z.ai</a>.
 </p>
 
 ## Introduction
+
+### GLM-5.3 & GLM-5.3-Flash
+
+GLM-5.3 uses the same base model as GLM-5.2 — every gain comes from post-training. Compared with GLM-5.2, it is much better at complex coding and long-horizon tasks:
+
++ Stronger Coding: GLM-5.3 is the most capable open-weights model for coding, with a 50% improvement over GLM-5.2 on our in-house Z.ai Code Bench. It also achieve open-source SOTA on public benchmarks including Terminal Bench 3.0 and
+  Agents' Last Exam.
++ Emergent Cyber Capability: As we scaled post-training, cyber capability developed faster than we expected. GLM-5.3 is state of the art on CyberGym for vulnerability discovery, and its gains are largest further up the exploitation chain, where it more than doubles GLM-5.2 on exploitation benchmarks.
+
+![bench_53_2](resources/bench_53_2.png)
+
+GLM-5.3-Flash starts from a newly trained base model, with its architecture and training recipe redesigned around capability and efficiency. For the first time in the GLM series, we introduce a hybrid architecture combining sparse and linear attention, sharply reducing long-context serving costs while preserving precise long-context capabilities. The model also adopts Manifold-Constrained Hyper-Connections (mHC) to further improve scaling efficiency. Together with our latest 30T-token multimodal pre-training corpus, these changes enable GLM-5.3-Flash to deliver more intelligence with less compute.
+
+![bench_53](resources/bench_53.png)
+
+### GLM-5.2
+
+GLM-5.2, our latest flagship model for long-horizon tasks. It marks a substantial leap in long-horizon task capability over its predecessor GLM-5.1 and, for the first time, delivers that capability on a **solid 1M-token context**.
+
+GLM-5.2's new capabilities include:
+- **Solid 1M Context:** A solid 1M-token context that stably sustains long-horizon work
+- **Advanced Coding with Flexible Effort**: Stronger coding capabilities with multiple thinking effort levels to balance performance and latency
+- **Improved Architecture**: We propose [IndexShare](https://arxiv.org/abs/2603.12201), which reuses the same indexer across every four sparse attention layers, reducing per-token FLOPs by 2.9× at a 1M context length. We also improve GLM-5.2’s MTP layer for speculative decoding, increasing the acceptance length by up to 20%
+
+![bench_52](resources/bench_52.png)
+
+On standard coding benchmarks, GLM-5.2 is the strongest open-source model, improving on GLM-5.1 by a wide margin: 81.0 vs. 62.0 on Terminal-Bench 2.1 and 62.1 vs. 58.4 on SWE-bench Pro. It also closes much of the gap to the closed-source frontier — on Terminal-Bench 2.1 (81.0) it lands within a few points of Claude Opus 4.8 (85.0) — while staying ahead of Gemini 3.1 Pro.
+
+For more detail, check our [blog](https://z.ai/blog/glm-5.2).
 
 ### GLM-5.1
 
@@ -43,79 +72,52 @@ On [Vending Bench 2](https://andonlabs.com/evals/vending-bench-2), a benchmark t
 
 ## Download Model
 
-| Model       | Download Links                                                                                                                      | Model Size | Precision |
-|-------------|-------------------------------------------------------------------------------------------------------------------------------------|------------|-----------|
-| GLM-5.1     | [🤗 Hugging Face](https://huggingface.co/zai-org/GLM-5.1)<br> [🤖 ModelScope](https://modelscope.cn/models/ZhipuAI/GLM-5.1)         | 744B-A40B  | BF16      |
-| GLM-5.1-FP8 | [🤗 Hugging Face](https://huggingface.co/zai-org/GLM-5.1-FP8)<br> [🤖 ModelScope](https://modelscope.cn/models/ZhipuAI/GLM-5.1-FP8) | 744B-A40B  | FP8       |
-| GLM-5       | [🤗 Hugging Face](https://huggingface.co/zai-org/GLM-5)<br> [🤖 ModelScope](https://modelscope.cn/models/ZhipuAI/GLM-5)             | 744B-A40B  | BF16      |
-| GLM-5-FP8   | [🤗 Hugging Face](https://huggingface.co/zai-org/GLM-5-FP8)<br> [🤖 ModelScope](https://modelscope.cn/models/ZhipuAI/GLM-5-FP8)     | 744B-A40B  | FP8       |
+| Model              | Download Links                                                                                                                                    | Model Size | Precision |
+|--------------------|---------------------------------------------------------------------------------------------------------------------------------------------------|------------|-----------|
+| GLM-5.3            | [🤗 Hugging Face](https://huggingface.co/zai-org/GLM-5.3)<br> [🤖 ModelScope](https://modelscope.cn/models/ZhipuAI/GLM-5.3)                       | 744B-A40B  | FP8       |
+| GLM-5.3-BF16       | [🤗 Hugging Face](https://huggingface.co/zai-org/GLM-5.3-BF16)<br> [🤖 ModelScope](https://modelscope.cn/models/ZhipuAI/GLM-5.3-BF16)             | 744B-A40B  | BF16      |
+| GLM-5.3-Flash      | [🤗 Hugging Face](https://huggingface.co/zai-org/GLM-5.3-Flash)<br> [🤖 ModelScope](https://modelscope.cn/models/ZhipuAI/GLM-5.3-Flash)           | 320B-A18B  | FP8       |
+| GLM-5.3-Flash-BF16 | [🤗 Hugging Face](https://huggingface.co/zai-org/GLM-5.3-Flash-BF16)<br> [🤖 ModelScope](https://modelscope.cn/models/ZhipuAI/GLM-5.3-Flash-BF16) | 320B-A18B  | BF16      |
+| GLM-5.2            | [🤗 Hugging Face](https://huggingface.co/zai-org/GLM-5.2)<br> [🤖 ModelScope](https://modelscope.cn/models/ZhipuAI/GLM-5.2)                       | 744B-A40B  | BF16      |
+| GLM-5.2-FP8        | [🤗 Hugging Face](https://huggingface.co/zai-org/GLM-5.2-FP8)<br> [🤖 ModelScope](https://modelscope.cn/models/ZhipuAI/GLM-5.2-FP8)               | 744B-A40B  | FP8       |
+| GLM-5.1            | [🤗 Hugging Face](https://huggingface.co/zai-org/GLM-5.1)<br> [🤖 ModelScope](https://modelscope.cn/models/ZhipuAI/GLM-5.1)                       | 744B-A40B  | BF16      |
+| GLM-5.1-FP8        | [🤗 Hugging Face](https://huggingface.co/zai-org/GLM-5.1-FP8)<br> [🤖 ModelScope](https://modelscope.cn/models/ZhipuAI/GLM-5.1-FP8)               | 744B-A40B  | FP8       |
+| GLM-5              | [🤗 Hugging Face](https://huggingface.co/zai-org/GLM-5)<br> [🤖 ModelScope](https://modelscope.cn/models/ZhipuAI/GLM-5)                           | 744B-A40B  | BF16      |
+| GLM-5-FP8          | [🤗 Hugging Face](https://huggingface.co/zai-org/GLM-5-FP8)<br> [🤖 ModelScope](https://modelscope.cn/models/ZhipuAI/GLM-5-FP8)                   | 744B-A40B  | FP8       |
 
-## Serve GLM-5 Series Locally
+## Serve GLM-5 Series Models Locally
 
-### Prepare environment
+### GLM-5.3-Flash
 
-vLLM, SGLang, xLLM and Ktransformers all support local deployment of GLM-5 series model, A simple deployment guide is provided here.
+- [SGLang](https://github.com/sgl-project/sglang) — see [cookbook](https://cookbook.sglang.io/autoregressive/GLM/GLM-5.3-Flash)
+- [vLLM](https://github.com/vllm-project/vllm) — see [recipes](https://recipes.vllm.ai/zai-org/GLM-5.3-Flash)
+- [TokenSpeed](https://github.com/lightseekorg/tokenspeed) — see [here](https://lightseek.org/tokenspeed/recipes/models#glm-5-3-flash)
+- [Transformers](https://github.com/huggingface/transformers) — see [transformers docs](https://github.com/huggingface/transformers/blob/main/docs/source/en/model_doc/glm5_next.md)
+- [KTransformers](https://github.com/kvcache-ai/ktransformers) — see [tutorial](https://github.com/kvcache-ai/ktransformers/blob/main/doc/en/kt-kernel/GLM-5.3-Flash-Tutorial.md)
+- [Unsloth](https://github.com/unslothai/unsloth) — see [guide](https://unsloth.ai/docs/models/glm-5.3)
 
-+ vLLM
+### GLM-5.3 and Earlier GLM-5 Models
 
-    Using Docker as:
-    ```shell
-    docker pull vllm/vllm-openai:glm51
-    docker pull vllm/vllm-openai:glm51-cu130 # For CUDA 13.0
-    ```
+- [SGLang](https://github.com/sgl-project/sglang)  — see [cookbook](https://cookbook.sglang.io/autoregressive/GLM/GLM-5.3)
+- [vLLM](https://github.com/vllm-project/vllm) — see [recipes](https://recipes.vllm.ai/zai-org/GLM-5.3)
+- [Transformers](https://github.com/huggingface/transformers) — see [transformers docs](https://github.com/huggingface/transformers/blob/main/docs/source/en/model_doc/glm_moe_dsa.md)
+- [KTransformers](https://github.com/kvcache-ai/ktransformers) — see [tutorial](https://github.com/kvcache-ai/ktransformers/blob/main/doc/en/kt-kernel/GLM-5.2-Tutorial.md)
+- [Unsloth](https://github.com/unslothai/unsloth) — see [guide](https://unsloth.ai/docs/models/glm-5.2)
+- For deployment on the `Ascend NPU` platform, inference frameworks such as vLLM-Ascend, xLLM and SGLang are supported — see [here](example/ascend.md).
 
-+ SGLang
 
-    Using Docker as:
-    ```bash
-    docker pull lmsysorg/sglang:v0.5.10
-    docker pull lmsysorg/sglang:v0.5.10-cu130 # For CUDA 13.0
-    ```
+### Note
 
-### Deploy
+- **GLM-5.2** accept only `high` and `max` for `reasoning_effort`, with the same `max` default and the same fallback behavior.
+- **GLM-5.3 and GLM-5.3-Flash** supports controlling the thinking budget through the `reasoning_effort` parameter, which accepts three levels: `low`, `high`, and `max`. It defaults to `max` if not passed (or if set to any other value). To use `low` or `high`, pass them explicitly. For benchmark and leaderboard reproduction, keep the default `max`.
+- In the chat template for GLM-5.3 and GLM-5.3-Flash, `clear_thinking` defaults to `false` if not passed. For chat scenarios, explicitly pass `clear_thinking=true`.
 
-+ vLLM
+## Fine-tuning GLM-5 Series Models
 
-    ```shell
-    vllm serve zai-org/GLM-5.1-FP8 \
-         --tensor-parallel-size 8 \
-         --gpu-memory-utilization 0.85 \
-         --speculative-config.method mtp \
-         --speculative-config.num_speculative_tokens 3 \
-         --tool-call-parser glm47 \
-         --reasoning-parser glm45 \
-         --enable-auto-tool-choice \
-         --chat-template-content-format=string \
-         --served-model-name glm-5.1-fp8
-    ```
-    Check the [recipes](https://github.com/vllm-project/recipes/blob/main/GLM/GLM5.md) for more details.
->Note: When encounter Tool Call Parse issue with MTP enabled, please turn to vllm main branch to serve GLM-5.1.
+The GLM-5 series supports fine-tuning with the following frameworks. Feel free to try them out:
 
-+ SGLang
-
-    ```shell
-    SGLANG_ENABLE_SPEC_V2=1 sglang serve \
-        --model-path zai-org/GLM-5.1-FP8 \
-        --tp-size 8 \
-        --tool-call-parser glm47  \
-        --reasoning-parser glm45 \
-        --speculative-algorithm EAGLE \
-        --speculative-num-steps 3 \
-        --speculative-eagle-topk 1 \
-        --speculative-num-draft-tokens 4 \
-        --mem-fraction-static 0.85 \
-        --served-model-name glm-5.1-fp8
-    ```
-
-    Check the [sglang cookbook](https://cookbook.sglang.io/autoregressive/GLM/GLM-5.1) for more details.
-
-+ xLLM
-
-    Please check the deployment guide [here](https://github.com/zai-org/GLM-5/blob/main/example/ascend.md).
-
-+ Ktransformers
-
-    Please check the deployment guide [here](https://github.com/kvcache-ai/ktransformers/blob/main/doc/en/kt-kernel/GLM-5.1-Tutorial.md).
+- [Slime](https://github.com/THUDM/slime) (v0.3.0+), the reinforcement learning framework used by the GLM team.
+- [ms-swift](https://github.com/modelscope/ms-swift) (v4.4.0+), supporting SFT, PPO, and GRPO.
 
 ## Citation
 
